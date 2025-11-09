@@ -56,11 +56,11 @@ const Content: React.FC<ContentProps> = ({ topic }) => {
 
   // Memoize markdown components to avoid recreating on every render
   const markdownComponents: Components = useMemo(() => ({
-    code({ inline, className, children, ...props }) {
+    code(props) {
+      const { node, inline, className, children, ...rest } = props as any;
       const match = /language-(\w+)/.exec(className || '');
       return !inline && match ? (
         <SyntaxHighlighter
-          {...props}
           style={atomDark}
           language={match[1]}
           PreTag='div'
@@ -68,7 +68,7 @@ const Content: React.FC<ContentProps> = ({ topic }) => {
           {String(children).replace(/\n$/, '')}
         </SyntaxHighlighter>
       ) : (
-        <code className={className} {...props}>
+        <code className={className} {...rest}>
           {children}
         </code>
       );

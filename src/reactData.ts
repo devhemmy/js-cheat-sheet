@@ -1,4 +1,6 @@
-export const reactTopics = [
+import type { TopicCategory } from './types';
+
+export const reactTopics: TopicCategory[] = [
   {
     title: 'Core Fundamentals',
     topics: {

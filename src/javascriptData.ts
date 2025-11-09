@@ -1,4 +1,6 @@
-export const javascriptTopics = [
+import type { TopicCategory } from './types';
+
+export const javascriptTopics: TopicCategory[] = [
   {
     title: 'Core Fundamentals',
     topics: {

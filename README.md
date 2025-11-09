@@ -2,6 +2,7 @@
 
 > A modern, production-ready web application designed to help developers ace their technical interviews with comprehensive coverage of JavaScript, TypeScript, and React concepts.
 
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/devhemmy/js-cheat-sheet)
 [![React](https://img.shields.io/badge/React-19.1.1-61DAFB?logo=react)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1.16-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
@@ -53,7 +54,7 @@
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/devhemmy/js-cheat-sheet.git
 
 # Navigate to project directory
 cd js-cheat-sheet
@@ -291,7 +292,7 @@ This creates an optimized production build in the `dist/` directory.
 1. Update `vite.config.ts`:
    ```typescript
    export default defineConfig({
-     base: '/your-repo-name/',
+     base: '/js-cheat-sheet/',
      plugins: [react(), tailwindcss()],
    });
    ```
