@@ -2,7 +2,7 @@
 
 > A modern, production-ready web application designed to help developers ace their technical interviews with comprehensive coverage of JavaScript, TypeScript, and React concepts.
 
-**🌐 Live Demo:** [https://js-cheat-sheet-adi9upk81-ibrahem-bastawi-hassans-projects.vercel.app/](https://js-cheat-sheet-adi9upk81-ibrahem-bastawi-hassans-projects.vercel.app/)
+**🌐 Live Demo:** [https://js-cheat-sheet-eight.vercel.app/](https://js-cheat-sheet-eight.vercel.app/)
 
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?logo=github)](https://github.com/devhemmy/js-cheat-sheet)
 [![React](https://img.shields.io/badge/React-19.1.1-61DAFB?logo=react)](https://reactjs.org/)
@@ -35,6 +35,7 @@
 ## 📦 Topics Covered
 
 ### JavaScript
+
 - **Core Fundamentals**: var/let/const, this keyword, data types, equality, type coercion
 - **Scope & Functions**: closures, arrow vs regular functions
 - **Async JavaScript**: event loop, promises, async/await
@@ -42,6 +43,7 @@
 - **Modern ES6+**: destructuring, spread/rest, modules, array methods
 
 ### TypeScript
+
 - **Fundamentals**: core types, annotations, interfaces vs types
 - **Advanced Types**: unions, intersections, generics, enums, type guards, utility types
 - **OOP**: classes, implementing interfaces
@@ -50,6 +52,7 @@
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js 18+ and npm/yarn
 
 ### Installation
@@ -138,14 +141,18 @@ js-cheat-sheet/
 ## 🔧 Configuration
 
 ### TypeScript
+
 The project uses strict TypeScript configuration with:
+
 - Strict mode enabled
 - ES2020 target
 - ESNext modules
 - React JSX
 
 ### Vite
+
 Optimized for production with:
+
 - Tree shaking
 - Code splitting
 - Asset optimization
@@ -154,12 +161,15 @@ Optimized for production with:
 ## 🚀 Performance Optimizations
 
 ### Code-Level Optimizations
+
 1. **React Memoization**:
+
    - `useMemo` for expensive computations (topic lookups, display names)
    - `useCallback` for event handlers (prevents function recreation)
    - `React.memo()` for component memoization (TopicSection)
 
 2. **Bundle Size Reduction**:
+
    - Optimized syntax highlighter: Import only needed languages (~150KB savings)
    - Removed unused components (CheatSheet, Features)
    - Tree shaking removes dead code
@@ -171,6 +181,7 @@ Optimized for production with:
    - Memoized markdown components
 
 ### Build-Level Optimizations
+
 4. **Vite Production Build**:
    - Automatic code splitting
    - Asset optimization
@@ -178,6 +189,7 @@ Optimized for production with:
    - Fast HMR in development
 
 ### Architecture Optimizations
+
 5. **Centralized Configuration**:
    - Routes config prevents duplicate strings
    - Topic data map created once outside components
@@ -188,23 +200,27 @@ Optimized for production with:
 ## 🔒 Error Handling
 
 ### ErrorBoundary Component
+
 - **Environment-Aware Logging**: Console errors only in development
 - **Production-Ready**: Generic error messages in production, detailed in dev
 - **Stack Trace Display**: Collapsible stack trace (dev only)
 - **Safe Navigation**: Proper window.location handling
 
 ### Content Error States
+
 1. **Invalid Section**: Handles unknown route paths (🚫 icon)
 2. **Topic Not Found**: Shows which topic is invalid with helpful message (❌ icon)
 3. **Welcome State**: Friendly greeting when no topic selected (📚 icon)
 4. **Defensive Checks**: Guards against invalid topic types
 
 ### Type Safety
+
 - TypeScript strict mode prevents runtime errors
 - No `any` types - full type coverage
 - Non-null assertions replaced with proper checks (main.tsx)
 
 ### Routing
+
 - Custom 404 page for undefined routes
 - Fallback UI for Suspense boundaries
 - Graceful degradation
@@ -212,12 +228,15 @@ Optimized for production with:
 ## 🏆 Code Quality & Best Practices
 
 ### Architecture Decisions
+
 - **Centralized Route Config** (`src/config/routes.ts`):
+
   - Single source of truth for all routes
   - Type-safe route helpers: `getTopicRoute()`, `getTopicTypeFromPath()`
   - Navigation items configured once, used everywhere
 
 - **Component Reusability**:
+
   - Eliminated 60+ lines of duplicate code in TableOfContents
   - Created reusable `TopicSection` memoized component
   - Extracted classNames as constants
@@ -228,18 +247,21 @@ Optimized for production with:
   - Reusable utility functions
 
 ### Performance Patterns
+
 - Data objects created outside components (prevent recreation)
 - Memoized components prevent unnecessary re-renders
 - Optimized dependency arrays in hooks
 - Lazy loading for route-based code splitting
 
 ### Type Safety Practices
+
 - No `any` types in the codebase
 - Proper type imports using `import type`
 - Type-safe route configuration
 - Comprehensive interface definitions
 
 ### Error Handling Strategy
+
 - Multiple error states with appropriate UI
 - Environment-aware error reporting
 - Defensive programming with guards
@@ -247,12 +269,12 @@ Optimized for production with:
 
 ## 📜 Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server with hot reload at `http://localhost:5173` |
-| `npm run build` | Build for production (TypeScript check + Vite build) |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint to check code quality |
+| Command           | Description                                                         |
+| ----------------- | ------------------------------------------------------------------- |
+| `npm run dev`     | Start development server with hot reload at `http://localhost:5173` |
+| `npm run build`   | Build for production (TypeScript check + Vite build)                |
+| `npm run preview` | Preview production build locally                                    |
+| `npm run lint`    | Run ESLint to check code quality                                    |
 
 ## 🌐 Deployment
 
@@ -267,6 +289,7 @@ This creates an optimized production build in the `dist/` directory.
 ### Deploy to Vercel (Recommended)
 
 1. Install Vercel CLI:
+
    ```bash
    npm install -g vercel
    ```
@@ -279,6 +302,7 @@ This creates an optimized production build in the `dist/` directory.
 ### Deploy to Netlify
 
 1. Install Netlify CLI:
+
    ```bash
    npm install -g netlify-cli
    ```
@@ -292,6 +316,7 @@ This creates an optimized production build in the `dist/` directory.
 ### Deploy to GitHub Pages
 
 1. Update `vite.config.ts`:
+
    ```typescript
    export default defineConfig({
      base: '/js-cheat-sheet/',
@@ -354,6 +379,7 @@ Contributions are welcome! Here's how you can help:
 ### Adding New Topics
 
 To add new interview topics, edit the appropriate data file:
+
 - `src/javascriptData.ts` for JavaScript topics
 - `src/typescriptData.ts` for TypeScript topics
 - `src/reactData.ts` for React topics
