@@ -6,6 +6,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { javascriptTopics } from '../javascriptData';
 import { typescriptTopics } from '../typescriptData';
+import { reactTopics } from '../reactData';
 import './Markdown.css';
 
 interface ContentProps {
@@ -15,11 +16,12 @@ interface ContentProps {
 const Content: React.FC<ContentProps> = ({ topic }) => {
   const { pathname } = useLocation();
   const isTypeScript = pathname.startsWith('/typescript');
+  const isReact = pathname.startsWith('/react');
 
   let selectedTopic = null;
 
   if (topic) {
-    const topics = isTypeScript ? typescriptTopics : javascriptTopics;
+    const topics = isReact ? reactTopics : isTypeScript ? typescriptTopics : javascriptTopics;
     for (const category of topics) {
       if (category.topics[topic]) {
         selectedTopic = category.topics[topic];
@@ -34,7 +36,7 @@ const Content: React.FC<ContentProps> = ({ topic }) => {
         <div className="text-center py-20 px-5">
           <div className="text-6xl mb-6 animate-bounce">📚</div>
           <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-violet-500 to-pink-400 bg-clip-text text-transparent">
-            Welcome to {isTypeScript ? 'TypeScript' : 'JavaScript'} Cheat Sheet
+            Welcome to {isReact ? 'React' : isTypeScript ? 'TypeScript' : 'JavaScript'} Cheat Sheet
           </h2>
           <p className="text-lg text-white/60 max-w-md mx-auto leading-relaxed">
             Select a topic from the table of contents to get started with your

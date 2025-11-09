@@ -20,6 +20,8 @@ function App() {
             <Route path='/javascript' element={<JavaScriptPage />} />
             <Route path='/typescript/:topic' element={<JavaScriptPage />} />
             <Route path='/typescript' element={<JavaScriptPage />} />
+            <Route path='/react/:topic' element={<JavaScriptPage />} />
+            <Route path='/react' element={<JavaScriptPage />} />
             <Route path='*' element={
               <div className="flex-1 flex items-center justify-center">
                 <div className="text-center">
