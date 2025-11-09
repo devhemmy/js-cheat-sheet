@@ -3,15 +3,8 @@ import { useLocation } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import type { Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript';
-import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
-import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
-import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
-import json from 'react-syntax-highlighter/dist/esm/languages/prism/json';
-import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
-import css from 'react-syntax-highlighter/dist/esm/languages/prism/css';
 import { javascriptTopics } from '../javascriptData';
 import { typescriptTopics } from '../typescriptData';
 import { reactTopics } from '../reactData';
@@ -19,17 +12,6 @@ import { getTopicTypeFromPath } from '../config/routes';
 import { card, text } from '../styles/shared';
 import type { Topic, TopicCategory } from '../types';
 import './Markdown.css';
-
-// Register only the languages we need to reduce bundle size
-SyntaxHighlighter.registerLanguage('javascript', javascript);
-SyntaxHighlighter.registerLanguage('typescript', typescript);
-SyntaxHighlighter.registerLanguage('jsx', jsx);
-SyntaxHighlighter.registerLanguage('tsx', tsx);
-SyntaxHighlighter.registerLanguage('json', json);
-SyntaxHighlighter.registerLanguage('bash', bash);
-SyntaxHighlighter.registerLanguage('css', css);
-SyntaxHighlighter.registerLanguage('js', javascript); // Alias
-SyntaxHighlighter.registerLanguage('ts', typescript); // Alias
 
 interface ContentProps {
   topic?: string;
@@ -78,10 +60,10 @@ const Content: React.FC<ContentProps> = ({ topic }) => {
       const match = /language-(\w+)/.exec(className || '');
       return !inline && match ? (
         <SyntaxHighlighter
+          {...props}
           style={atomDark}
           language={match[1]}
           PreTag='div'
-          {...props}
         >
           {String(children).replace(/\n$/, '')}
         </SyntaxHighlighter>

@@ -84,7 +84,8 @@
   padding: 0 !important;
 }
 
-.content code {
+/* Inline code only - not code blocks */
+.content :not(pre) > code {
   font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
   background: rgba(102, 126, 234, 0.15);
   color: #f093fb;
@@ -94,11 +95,13 @@
   border: 1px solid rgba(102, 126, 234, 0.2);
 }
 
+/* Code blocks - let syntax highlighter handle the styling */
 .content pre code {
   background: transparent;
   border: none;
   padding: 0;
-  color: inherit;
+  /* Removed color: inherit to let syntax highlighter control colors */
+  font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
 }
 
 .content blockquote {
