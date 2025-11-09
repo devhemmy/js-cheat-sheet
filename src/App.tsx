@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
+import { ROUTES } from './config/routes';
 
 // Lazy load the JavaScriptPage component for better performance
 const JavaScriptPage = lazy(() => import('./components/JavaScriptPage'));
@@ -15,19 +16,19 @@ function App() {
         <Header />
         <Suspense fallback={<LoadingSpinner />}>
           <Routes>
-            <Route path='/' element={<Hero />} />
-            <Route path='/javascript/:topic' element={<JavaScriptPage />} />
-            <Route path='/javascript' element={<JavaScriptPage />} />
-            <Route path='/typescript/:topic' element={<JavaScriptPage />} />
-            <Route path='/typescript' element={<JavaScriptPage />} />
-            <Route path='/react/:topic' element={<JavaScriptPage />} />
-            <Route path='/react' element={<JavaScriptPage />} />
+            <Route path={ROUTES.HOME} element={<Hero />} />
+            <Route path={`${ROUTES.JAVASCRIPT}/:topic`} element={<JavaScriptPage />} />
+            <Route path={ROUTES.JAVASCRIPT} element={<JavaScriptPage />} />
+            <Route path={`${ROUTES.TYPESCRIPT}/:topic`} element={<JavaScriptPage />} />
+            <Route path={ROUTES.TYPESCRIPT} element={<JavaScriptPage />} />
+            <Route path={`${ROUTES.REACT}/:topic`} element={<JavaScriptPage />} />
+            <Route path={ROUTES.REACT} element={<JavaScriptPage />} />
             <Route path='*' element={
               <div className="flex-1 flex items-center justify-center">
                 <div className="text-center">
                   <h1 className="text-6xl font-bold mb-4">404</h1>
                   <p className="text-xl text-white/60 mb-8">Page not found</p>
-                  <a href="/" className="px-6 py-3 bg-gradient-to-r from-purple-500 to-violet-600 rounded-full hover:shadow-lg transition-all duration-300">
+                  <a href={ROUTES.HOME} className="px-6 py-3 bg-gradient-to-r from-purple-500 to-violet-600 rounded-full hover:shadow-lg transition-all duration-300">
                     Go Home
                   </a>
                 </div>

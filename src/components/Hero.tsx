@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../config/routes';
 
 const Hero = () => {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate('/javascript');
+    navigate(ROUTES.JAVASCRIPT);
   };
 
   return (

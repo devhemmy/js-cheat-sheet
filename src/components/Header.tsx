@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { ROUTES, NAV_ITEMS } from '../config/routes';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navLinkClass = "relative text-white/80 hover:text-white font-medium py-2 transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-purple-400 after:to-violet-600 hover:after:w-full after:transition-all after:duration-300";
+  const mobileNavLinkClass = "px-4 py-3 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300";
 
   return (
     <header className="sticky top-0 z-50 bg-white/5 backdrop-blur-xl border-b border-white/10 shadow-lg">
@@ -10,7 +14,7 @@ const Header = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link
-            to="/"
+            to={ROUTES.HOME}
             className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-violet-500 to-purple-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
           >
             JS Cheat Sheet
@@ -18,24 +22,15 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-10" role="navigation" aria-label="Main navigation">
-            <Link
-              to="/javascript"
-              className="relative text-white/80 hover:text-white font-medium py-2 transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-purple-400 after:to-violet-600 hover:after:w-full after:transition-all after:duration-300"
-            >
-              JavaScript
-            </Link>
-            <Link
-              to="/typescript"
-              className="relative text-white/80 hover:text-white font-medium py-2 transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-purple-400 after:to-violet-600 hover:after:w-full after:transition-all after:duration-300"
-            >
-              TypeScript
-            </Link>
-            <Link
-              to="/react"
-              className="relative text-white/80 hover:text-white font-medium py-2 transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-purple-400 after:to-violet-600 hover:after:w-full after:transition-all after:duration-300"
-            >
-              React
-            </Link>
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.type}
+                to={item.path}
+                className={navLinkClass}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
           {/* Mobile menu button */}
@@ -67,27 +62,16 @@ const Header = () => {
         {isMenuOpen && (
           <nav className="md:hidden py-4 border-t border-white/10" role="navigation" aria-label="Mobile navigation">
             <div className="flex flex-col gap-2">
-              <Link
-                to="/javascript"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
-              >
-                JavaScript
-              </Link>
-              <Link
-                to="/typescript"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
-              >
-                TypeScript
-              </Link>
-              <Link
-                to="/react"
-                onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
-              >
-                React
-              </Link>
+              {NAV_ITEMS.map((item) => (
+                <Link
+                  key={item.type}
+                  to={item.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={mobileNavLinkClass}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
           </nav>
         )}
