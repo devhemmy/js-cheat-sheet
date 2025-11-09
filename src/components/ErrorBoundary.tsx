@@ -20,7 +20,13 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo);
+    // Only log to console in development mode
+    if (import.meta.env.DEV) {
+      console.error('Uncaught error:', error, errorInfo);
+    }
+
+    // In production, you would send this to an error tracking service
+    // Example: Sentry.captureException(error, { extra: errorInfo });
   }
 
   private handleReset = () => {
@@ -38,8 +44,20 @@ class ErrorBoundary extends Component<Props, State> {
               Oops! Something went wrong
             </h1>
             <p className="text-white/60 mb-6 text-sm">
-              {this.state.error?.message || 'An unexpected error occurred'}
+              {import.meta.env.DEV
+                ? this.state.error?.message
+                : 'An unexpected error occurred. Please try again.'}
             </p>
+            {import.meta.env.DEV && this.state.error?.stack && (
+              <details className="text-left mb-6 text-xs text-white/40">
+                <summary className="cursor-pointer hover:text-white/60 mb-2">
+                  Error Details (Dev Only)
+                </summary>
+                <pre className="overflow-auto max-h-40 bg-black/20 p-3 rounded-lg">
+                  {this.state.error.stack}
+                </pre>
+              </details>
+            )}
             <button
               onClick={this.handleReset}
               className="px-6 py-3 bg-gradient-to-r from-purple-500 to-violet-600 rounded-full text-white font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"

@@ -1,21 +1,28 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { ROUTES, NAV_ITEMS } from '../config/routes';
+import { navLink, layout, text } from '../styles/shared';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const navLinkClass = "relative text-white/80 hover:text-white font-medium py-2 transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-purple-400 after:to-violet-600 hover:after:w-full after:transition-all after:duration-300";
-  const mobileNavLinkClass = "px-4 py-3 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300";
+  // Memoize toggle function to prevent unnecessary re-renders
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen((prev) => !prev);
+  }, []);
+
+  const closeMenu = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 bg-white/5 backdrop-blur-xl border-b border-white/10 shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+      <div className={layout.container}>
+        <div className={`${layout.flexBetween} h-20`}>
           {/* Logo */}
           <Link
             to={ROUTES.HOME}
-            className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-violet-500 to-purple-600 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300"
+            className={`text-2xl font-bold ${text.gradientHeading} hover:scale-105 transition-transform duration-300`}
           >
             JS Cheat Sheet
           </Link>
@@ -26,7 +33,7 @@ const Header = () => {
               <Link
                 key={item.type}
                 to={item.path}
-                className={navLinkClass}
+                className={navLink.desktop}
               >
                 {item.label}
               </Link>
@@ -35,7 +42,7 @@ const Header = () => {
 
           {/* Mobile menu button */}
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={toggleMenu}
             className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-300"
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
@@ -66,8 +73,8 @@ const Header = () => {
                 <Link
                   key={item.type}
                   to={item.path}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={mobileNavLinkClass}
+                  onClick={closeMenu}
+                  className={navLink.mobile}
                 >
                   {item.label}
                 </Link>
