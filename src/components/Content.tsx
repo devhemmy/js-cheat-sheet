@@ -8,6 +8,7 @@ import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { javascriptData } from '../data/javascript';
 import { typescriptData } from '../data/typescript';
 import { reactData } from '../data/react';
+import { angularData } from '../data/angular';
 import { getTopicTypeFromPath } from '../config/routes';
 import { card, text } from '../styles/shared';
 import type { Topic, CategoryIndex } from '../types';
@@ -22,6 +23,7 @@ const topicDataMap: Record<string, CategoryIndex> = {
   javascript: javascriptData,
   typescript: typescriptData,
   react: reactData,
+  angular: angularData,
 };
 
 const Content: React.FC<ContentProps> = ({ topic }) => {

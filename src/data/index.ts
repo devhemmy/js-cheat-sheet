@@ -2,6 +2,7 @@
 export { javascriptData, javascriptCategories, javascriptTopicIndex } from './javascript';
 export { typescriptData, typescriptCategories, typescriptTopicIndex } from './typescript';
 export { reactData, reactCategories, reactTopicIndex } from './react';
+export { angularData, angularCategories, angularTopicIndex } from './angular';
 
 // Re-export types for convenience
 export type { Topic, TopicCategory, TopicIndex, CategoryIndex, TopicMetadata } from '../types';

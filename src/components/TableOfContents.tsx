@@ -3,6 +3,7 @@ import { useMemo, memo } from 'react';
 import { javascriptData } from '../data/javascript';
 import { typescriptData } from '../data/typescript';
 import { reactData } from '../data/react';
+import { angularData } from '../data/angular';
 import { getTopicRoute, ROUTES, type TopicType } from '../config/routes';
 import { getTopicLinkClass, scrollbar } from '../styles/shared';
 import type { TopicCategory } from '../types';
@@ -74,6 +75,16 @@ const TableOfContents = () => {
           title="React Topics"
           categories={reactData.categories}
           topicType="react"
+          currentTopic={topic}
+        />
+      );
+    }
+    if (pathname.startsWith(ROUTES.ANGULAR)) {
+      return (
+        <TopicSection
+          title="Angular Topics"
+          categories={angularData.categories}
+          topicType="angular"
           currentTopic={topic}
         />
       );

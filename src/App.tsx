@@ -23,6 +23,8 @@ function App() {
             <Route path={ROUTES.TYPESCRIPT} element={<JavaScriptPage />} />
             <Route path={`${ROUTES.REACT}/:topic`} element={<JavaScriptPage />} />
             <Route path={ROUTES.REACT} element={<JavaScriptPage />} />
+            <Route path={`${ROUTES.ANGULAR}/:topic`} element={<JavaScriptPage />} />
+            <Route path={ROUTES.ANGULAR} element={<JavaScriptPage />} />
             <Route path='*' element={
               <div className="flex-1 flex items-center justify-center">
                 <div className="text-center">
