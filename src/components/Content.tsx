@@ -5,12 +5,12 @@ import type { Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { javascriptTopics } from '../javascriptData';
-import { typescriptTopics } from '../typescriptData';
-import { reactTopics } from '../reactData';
+import { javascriptData } from '../data/javascript';
+import { typescriptData } from '../data/typescript';
+import { reactData } from '../data/react';
 import { getTopicTypeFromPath } from '../config/routes';
 import { card, text } from '../styles/shared';
-import type { Topic, TopicCategory } from '../types';
+import type { Topic, CategoryIndex } from '../types';
 import './Markdown.css';
 
 interface ContentProps {
@@ -18,33 +18,28 @@ interface ContentProps {
 }
 
 // Memoize topic data map outside component to avoid recreating on every render
-const topicDataMap: Record<string, TopicCategory[]> = {
-  javascript: javascriptTopics,
-  typescript: typescriptTopics,
-  react: reactTopics,
+const topicDataMap: Record<string, CategoryIndex> = {
+  javascript: javascriptData,
+  typescript: typescriptData,
+  react: reactData,
 };
 
 const Content: React.FC<ContentProps> = ({ topic }) => {
   const { pathname } = useLocation();
   const topicType = getTopicTypeFromPath(pathname);
 
-  // Memoize selected topic lookup
+  // O(1) topic lookup using the pre-built index
   const selectedTopic = useMemo((): Topic | null => {
     if (!topic || !topicType) return null;
 
-    const topics = topicDataMap[topicType];
-    if (!topics) {
-      // This shouldn't happen with proper routing, but handle it defensively
+    const data = topicDataMap[topicType];
+    if (!data) {
       console.error(`Invalid topic type: ${topicType}`);
       return null;
     }
 
-    for (const category of topics) {
-      if (category.topics[topic]) {
-        return category.topics[topic];
-      }
-    }
-    return null;
+    // O(1) lookup using the topic index
+    return data.topicIndex.get(topic) ?? null;
   }, [topic, topicType]);
 
   // Memoize display name for the topic type

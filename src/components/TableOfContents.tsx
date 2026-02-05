@@ -1,35 +1,35 @@
 import { Link, useParams, useLocation } from 'react-router-dom';
 import { useMemo, memo } from 'react';
-import { javascriptTopics } from '../javascriptData';
-import { typescriptTopics } from '../typescriptData';
-import { reactTopics } from '../reactData';
+import { javascriptData } from '../data/javascript';
+import { typescriptData } from '../data/typescript';
+import { reactData } from '../data/react';
 import { getTopicRoute, ROUTES, type TopicType } from '../config/routes';
 import { getTopicLinkClass, scrollbar } from '../styles/shared';
 import type { TopicCategory } from '../types';
 
 interface TopicSectionProps {
   title: string;
-  topics: TopicCategory[];
+  categories: TopicCategory[];
   topicType: TopicType;
   currentTopic?: string;
 }
 
 // Memoized component for rendering topic sections
-const TopicSection = memo(({ title, topics, topicType, currentTopic }: TopicSectionProps) => {
+const TopicSection = memo(({ title, categories, topicType, currentTopic }: TopicSectionProps) => {
   return (
     <>
       <h2 className="text-2xl font-bold text-white mb-6 pb-3 border-b border-white/10">{title}</h2>
-      {topics.map((category, categoryIndex) => (
+      {categories.map((category, categoryIndex) => (
         <div key={`${topicType}-category-${categoryIndex}-${category.title}`} className="mb-6">
           <h3 className="mt-6 mb-4 text-xs font-bold uppercase tracking-wider text-white/90 first:mt-0">{category.title}</h3>
           <ul className="space-y-1">
-            {Object.keys(category.topics).map((topicKey) => (
-              <li key={`${topicType}-${category.title}-${topicKey}`}>
+            {category.topics.map((topic) => (
+              <li key={`${topicType}-${category.title}-${topic.key}`}>
                 <Link
-                  to={getTopicRoute(topicType, topicKey)}
-                  className={getTopicLinkClass(currentTopic === topicKey)}
+                  to={getTopicRoute(topicType, topic.key)}
+                  className={getTopicLinkClass(currentTopic === topic.key)}
                 >
-                  {category.topics[topicKey].title}
+                  {topic.title}
                 </Link>
               </li>
             ))}
@@ -49,13 +49,34 @@ const TableOfContents = () => {
   // Memoize the current section to render based on pathname
   const currentSection = useMemo(() => {
     if (pathname.startsWith(ROUTES.JAVASCRIPT)) {
-      return <TopicSection title="JavaScript Topics" topics={javascriptTopics} topicType="javascript" currentTopic={topic} />;
+      return (
+        <TopicSection
+          title="JavaScript Topics"
+          categories={javascriptData.categories}
+          topicType="javascript"
+          currentTopic={topic}
+        />
+      );
     }
     if (pathname.startsWith(ROUTES.TYPESCRIPT)) {
-      return <TopicSection title="TypeScript Topics" topics={typescriptTopics} topicType="typescript" currentTopic={topic} />;
+      return (
+        <TopicSection
+          title="TypeScript Topics"
+          categories={typescriptData.categories}
+          topicType="typescript"
+          currentTopic={topic}
+        />
+      );
     }
     if (pathname.startsWith(ROUTES.REACT)) {
-      return <TopicSection title="React Topics" topics={reactTopics} topicType="react" currentTopic={topic} />;
+      return (
+        <TopicSection
+          title="React Topics"
+          categories={reactData.categories}
+          topicType="react"
+          currentTopic={topic}
+        />
+      );
     }
     return null;
   }, [pathname, topic]);
