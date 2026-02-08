@@ -3,6 +3,8 @@ import { assertValidTopics } from '../../utils/validation';
 import { essentialsReactivity } from './essentialsReactivity';
 import { componentsArchitecture } from './componentsArchitecture';
 import { templatesRendering } from './templatesRendering';
+import { stylingTheming } from './stylingTheming';
+import { serviceArchitectureState } from './serviceArchitectureState';
 import { asyncDataResources } from './asyncDataResources';
 import { rxjsSignalWorld } from './rxjsSignalWorld';
 import { routingNavigation } from './routingNavigation';
@@ -18,6 +20,8 @@ export const angularData = createCategoryIndex([
   essentialsReactivity,
   componentsArchitecture,
   templatesRendering,
+  stylingTheming,
+  serviceArchitectureState,
   asyncDataResources,
   rxjsSignalWorld,
   routingNavigation,
